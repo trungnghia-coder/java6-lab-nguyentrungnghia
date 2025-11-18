@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lab 1 - Bài 3</title>
+</head>
+<body>
+    <i th:text="${message}"></i>
+    <form action="/login/check" method="post">
+        <p>Username: <input name="username">
+        <p>Password: <input name="password">
+        <p><input name="remember-me" type="checkbox"> Remember me?
+        <p><button>Login</button>
+    </form>
+</body>
+</html>

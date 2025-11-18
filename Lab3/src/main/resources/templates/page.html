@@ -1,0 +1,22 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Lab 3</title>
+</head>
+<body>
+    <a href="/">Home</a> |
+    <a href="/poly/url0">URL0</a> |
+    <a href="/poly/url1">URL1</a> |
+    <a href="/poly/url2">URL2</a> |
+    <a href="/poly/url3">URL3</a> |
+    <a href="/poly/url4">URL4</a>
+    <hr>
+    <h1>Page: <b th:text="${message}"></b></h1>
+    <hr>
+    <div th:replace="~{user-info :: userInfo}"></div>
+</body>
+</html>

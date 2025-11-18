@@ -1,0 +1,84 @@
+package poly.edu.lab2.config;
+
+import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.security.config.Customizer;
+import org.springframework.security.config.annotation.web.builders.HttpSecurity;
+import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.crypto.factory.PasswordEncoderFactories;
+import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.provisioning.InMemoryUserDetailsManager;
+import org.springframework.security.provisioning.JdbcUserDetailsManager;
+import org.springframework.security.web.SecurityFilterChain;
+import poly.edu.lab2.service.UserDetailsServiceImpl;
+
+import javax.sql.DataSource;
+
+@Configuration
+@EnableWebSecurity
+public class SecurityConfig {
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+//    @Bean
+//    public UserDetailsService userDetailsService(PasswordEncoder pe) {
+//        String password = pe.encode("123");
+//        UserDetails user1 = User.withUsername("user@gmail.com").password(password).roles("user").build();
+//        UserDetails user2 =  User.withUsername("admin@gmail.com").password(password).roles("admin").build();
+//        UserDetails user3 = User.withUsername("both@gmail.com").password(password).roles("user","admin").build();
+//        return new InMemoryUserDetailsManager(user1, user2, user3);
+//    }
+
+    @Bean
+    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+        // Bỏ cấu hình mặc định CSRF và CORS
+        http.csrf(config -> config.disable()).cors(config -> config.disable());
+        // Phân quyền sử dụng
+        http.authorizeHttpRequests(config -> {
+            config
+                    .requestMatchers("/poly/url1").authenticated()
+                    .requestMatchers("/poly/url2").hasRole("USER")
+                    .requestMatchers("/poly/url3").hasRole("ADMIN")
+                    .requestMatchers("/poly/url4").hasAnyRole("USER","ADMIN")
+                    .anyRequest().permitAll();
+        });
+        // Form đăng nhập
+        http.formLogin(config -> {
+            config.loginPage("/login/form");
+            config.loginProcessingUrl("/login/check");
+            config.defaultSuccessUrl("/login/success");
+            config.failureUrl("/login/failure");
+            config.permitAll();
+            config.usernameParameter("username");
+            config.passwordParameter("password");
+        });
+        // Ghi nhớ tài khoản
+        http.rememberMe(config -> {
+            config.tokenValiditySeconds(3*24*60*60);
+            config.rememberMeCookieName("remember-me");
+            config.rememberMeParameter("remember-me");
+        });
+        // Đăng xuất
+        http.logout(config -> {
+            config.logoutUrl("/logout");
+            config.logoutSuccessUrl("/login/exit");
+            config.clearAuthentication(true);
+            config.invalidateHttpSession(true);
+            config.deleteCookies("remember-me");
+        });
+        // Đăng xuất
+        http.logout(Customizer.withDefaults());
+        return http.build();
+    }
+
+//    Bài 2
+//    @Bean
+//    public UserDetailsService userDetailsService(DataSource dataSource) {
+//        return new JdbcUserDetailsManager(dataSource);
+//    }
+}
