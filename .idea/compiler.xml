@@ -19,6 +19,15 @@
           <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/1.18.30/lombok-1.18.30.jar" />
         </processorPath>
         <module name="Lab5" />
+      </profile>
+      <profile name="Annotation profile for Lab6" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <processorPath useClasspath="false">
+          <entry name="$MAVEN_REPOSITORY$/org/projectlombok/lombok/unknown/lombok-unknown.jar" />
+        </processorPath>
+        <module name="Lab6" />
         <module name="Lab4" />
       </profile>
     </annotationProcessing>
@@ -30,6 +39,7 @@
       <module name="Lab3" options="-parameters" />
       <module name="Lab4" options="-parameters" />
       <module name="Lab5" options="-parameters" />
+      <module name="Lab6" options="-parameters" />
     </option>
   </component>
 </project>
