@@ -18,7 +18,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.findAll();
     }
     @Override
-    public User findById(Integer id) {
+    public User findById(String id) {
         return userRepository.findById(id).orElse(null);
     }
     @Override
@@ -30,7 +30,7 @@ public class UserServiceImpl implements UserService {
         return userRepository.save(student);
     }
     @Override
-    public void deleteById(Integer id) {
+    public void deleteById(String id) {
         userRepository.deleteById(id);
     }
 }

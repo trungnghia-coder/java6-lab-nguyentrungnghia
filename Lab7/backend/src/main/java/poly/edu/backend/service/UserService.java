@@ -6,8 +6,8 @@ import java.util.List;
 
 public interface UserService {
     List<User> findAll();
-    User findById(Integer id);
+    User findById(String id);
     User create(User student);
     User update(User student);
-    void deleteById(Integer id);
+    void deleteById(String id);
 }
