@@ -2,9 +2,7 @@ package poly.edu.backend.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import poly.edu.backend.entity.Product;
 import poly.edu.backend.entity.User;
-import poly.edu.backend.service.ProductService;
 import poly.edu.backend.service.UserService;
 
 import java.util.List;
