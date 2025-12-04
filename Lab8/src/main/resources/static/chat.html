@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Spring Boot WebSocket</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@stomp/stompjs@7.0.0/bundles/stomp.umd.min.js"></script>
+</head>
+
+<body>
+<div id="chat-container">
+    <h3>Spring WebSocket Chat</h3>
+    <!--LOGIN-->
+    <div id="login">
+        <input id="username" placeholder="Username?" />
+        <button id="connect">Connect</button>
+        <button id="disconnect">Disconnect</button>
+    </div>
+    <hr />
+
+    <!--OUTPUT-->
+    <ul id="messages"></ul>
+
+    <!--INPUT-->
+    <div>
+        <input id="message" />
+        <button id="send">Send</button>
+    </div>
+</div>
+
+<script src="chat.js"></script>
+
+</body>
+
+</html>
